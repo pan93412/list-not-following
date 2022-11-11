@@ -1,4 +1,4 @@
-import { FsCacher } from "../cache/fs.js";
+import { FsCacher } from "../src/cache/fs.js";
 
 const cacher = new FsCacher("ultrabase", (v) => typeof v === "string");
 

@@ -15,9 +15,11 @@
   "dependencies": {
     "@types/node": "^18.11.9",
     "twitter-api-v2": "^1.12.9",
-    "typescript": "5.0.0-dev.20221110"
+    "typescript": "5.0.0-dev.20221110",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
+    "@jest/globals": "^29.3.1",
     "@types/jest": "^29.2.2",
     "jest": "^29.3.1",
     "prettier": "^2.7.1",

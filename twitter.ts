@@ -1,11 +1,5 @@
 import { TwitterApi, type UserV2 } from 'twitter-api-v2';
-
-/**
- * Get one on: <https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api>
- */
-const token = process.env.TWITTER_BEARER_TOKEN;
-
-if (!token) throw new Error("No Twitter bearer token found");
+import { unique } from './utils/unique.js';
 
 export type UserContainer = Set<UserV2>;
 
@@ -21,35 +15,21 @@ export class TwitterNotFollowingLister {
         return data.id;
     }
 
-    private static async unique<T>(...arrays: T[] | T[][]): Promise<Set<T>> {
-        const set = new Set<T>();
+    async _getTwitterFollowers(userId: string, nextToken?: string): Promise<UserV2[]> {
+        const { data, meta } = await this.#client.v2.followers(userId, {
+            pagination_token: nextToken,
+        });
 
-        for (const array of arrays) {
-            if (Array.isArray(array)) {
-                for (const item of array) {
-                    set.add(item);
-                }
-            } else {
-                set.add(array);
-            }
+        if (meta.next_token) {
+            data.push(
+                ...(await this._getTwitterFollowers(userId, meta.next_token))
+            )
         }
 
-        return set;
+        return data;
     }
 
-    // async getTwitterFollowers(userId: string, container: UserContainer): Promise<UserContainer> {
-    //     // Initiate a new container.
-    //     if (!container) container = new Set();
-
-    //     const { data, meta } = await this.#client.v2.followers(userId);
-
-    //     if (!meta.next_token) {
-    //         data.forEach(container.add, container);
-    //     } else {
-    //         data.forEach(container.add, container);
-
-    //         // Note that it may introduce the
-    //         await this.getTwitterFollowers(userId, container);
-    //     }
-    // }
+    async getTwitterFollowers(userId: string): Promise<UserContainer> {
+        return unique(await this._getTwitterFollowers(userId));
+    }
 }

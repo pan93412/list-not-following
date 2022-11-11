@@ -26,7 +26,7 @@ export class TwitterLister extends Lister {
     userId: string,
     nextToken?: string
   ): Promise<UserV2[]> {
-    const { data, meta } = await method(userId, {
+    const { data, meta } = await method.bind(this.#client.v2)(userId, {
       pagination_token: nextToken,
     });
 
@@ -54,14 +54,14 @@ export class TwitterLister extends Lister {
   }
 
   async getTwitterFollowers(userId: string): Promise<UserV2[]> {
-    const cacher = new FsCacher<UserV2[]>(`twitter:following-${userId}`);
+    const cacher = new FsCacher<UserV2[]>(`twitter-followers--${userId}`);
     return cacher.retrieveWithDefault(() =>
       this.getTwitterFollowersWithoutCache(userId)
     );
   }
 
   async getTwitterFollowing(userId: string): Promise<UserV2[]> {
-    const cacher = new FsCacher<UserV2[]>(`twitter:following-${userId}`);
+    const cacher = new FsCacher<UserV2[]>(`twitter-following--${userId}`);
     return cacher.retrieveWithDefault(() =>
       this.getTwitterFollowingWithoutCache(userId)
     );

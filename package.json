@@ -5,6 +5,7 @@
   "main": "index.ts",
   "module": "src/index.ts",
   "type": "module",
+  "packageManager": "pnpm@7.15.0",
   "scripts": {
     "start": "pnpm tsx index",
     "fmt": "prettier -w .",

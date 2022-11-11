@@ -6,8 +6,6 @@ import {
   type UserIdentifier,
 } from "../lister.js";
 
-export type UserContainer = Set<UserV2>;
-
 export class TwitterLister extends Lister {
   readonly #client: TwitterApi;
 

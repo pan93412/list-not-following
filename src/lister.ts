@@ -8,7 +8,7 @@ export type UnfollowedUserStructure = {
    * The user's profile.
    */
   url: string;
-}
+};
 
 export type UserIdentifier = string;
 
@@ -16,7 +16,9 @@ export type UserIdentifier = string;
  * The abstract class for listing all the unfollowed users.
  */
 export abstract class Lister {
-  abstract getUnfollowedUsers(id: UserIdentifier): Promise<UnfollowedUserStructure[]>;
+  abstract getUnfollowedUsers(
+    id: UserIdentifier
+  ): Promise<UnfollowedUserStructure[]>;
 
   /**
    * Determine ID from an artificial input.

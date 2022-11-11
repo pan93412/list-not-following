@@ -1,4 +1,4 @@
-import {jest} from '@jest/globals';
+import { jest } from "@jest/globals";
 import {
   BaseCacherAbstract,
   type CacheRetrieveOptions,
@@ -8,8 +8,12 @@ import {
 type RetrieveFunction<T> = (...args: any) => Promise<T>;
 type WriteFunction = (...args: any) => Promise<void>;
 
-const globalRetrieveFunction = jest.fn<RetrieveFunction<null>>().mockResolvedValue(null);
-const globalWriteFunction = jest.fn<WriteFunction>().mockResolvedValue(undefined);
+const globalRetrieveFunction = jest
+  .fn<RetrieveFunction<null>>()
+  .mockResolvedValue(null);
+const globalWriteFunction = jest
+  .fn<WriteFunction>()
+  .mockResolvedValue(undefined);
 
 class TestCacher extends BaseCacherAbstract<string> {
   retrieve(options?: CacheRetrieveOptions | undefined): Promise<string | null> {
@@ -62,7 +66,11 @@ describe("Check if the basic functions of BaseCacherAbstract works", () => {
       cacher.write("Hello, World!");
 
       expect(globalWriteFunction).toBeCalledTimes(1);
-      expect(globalWriteFunction).toBeCalledWith("hello", "Hello, World!", undefined);
+      expect(globalWriteFunction).toBeCalledWith(
+        "hello",
+        "Hello, World!",
+        undefined
+      );
     });
 
     it("with options, the first parameter should be the user-provided value", () => {
@@ -72,18 +80,25 @@ describe("Check if the basic functions of BaseCacherAbstract works", () => {
       cacher.write("Hello, World!", options);
 
       expect(globalWriteFunction).toBeCalledTimes(1);
-      expect(globalWriteFunction).toBeCalledWith("hello", "Hello, World!", options);
+      expect(globalWriteFunction).toBeCalledWith(
+        "hello",
+        "Hello, World!",
+        options
+      );
     });
   });
 
   describe("retrieveWithDefault()", () => {
     it("when cache hit, the write and default function shouldn't be called.", async () => {
       const cacher = new TestCacher("hello");
-      const mockRetrieveFunction = jest.fn<RetrieveFunction<string>>().mockResolvedValue("foo");
+      const mockRetrieveFunction = jest
+        .fn<RetrieveFunction<string>>()
+        .mockResolvedValue("foo");
       cacher.retrieve = mockRetrieveFunction;
 
-      const defaultFunction =
-        jest.fn<() => Promise<string>>().mockResolvedValue("bar");
+      const defaultFunction = jest
+        .fn<() => Promise<string>>()
+        .mockResolvedValue("bar");
       const retrieveValue = await cacher.retrieveWithDefault(defaultFunction);
 
       expect(retrieveValue).toBe("foo");
@@ -95,8 +110,9 @@ describe("Check if the basic functions of BaseCacherAbstract works", () => {
     it("when cache doesn't hit, the write function should be called.", async () => {
       const cacher = new TestCacher("hello");
 
-      const defaultFunction =
-        jest.fn<() => Promise<string>>().mockResolvedValue("bar");
+      const defaultFunction = jest
+        .fn<() => Promise<string>>()
+        .mockResolvedValue("bar");
       const retrieveValue = await cacher.retrieveWithDefault(defaultFunction);
 
       expect(retrieveValue).toBe("bar");

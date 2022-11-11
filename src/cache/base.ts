@@ -26,19 +26,14 @@ export abstract class BaseCacherAbstract<T> {
    *
    * @returns The cache, or undefined if it doesn't exist.
    */
-  abstract retrieve(
-    options?: CacheRetrieveOptions
-  ): Promise<T | null>;
+  abstract retrieve(options?: CacheRetrieveOptions): Promise<T | null>;
 
   /**
    * Write value to the cache.
    *
    * @returns A void {@see Promise}. May be rejected.
    */
-  abstract write(
-    value: T,
-    options?: CacheWriteOptions
-  ): Promise<void>;
+  abstract write(value: T, options?: CacheWriteOptions): Promise<void>;
 
   /**
    * Retrieve the cache, with the default handler.

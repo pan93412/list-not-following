@@ -1,7 +1,7 @@
 {
   "name": "list-not-following",
   "version": "1.0.0",
-  "description": "List who do not follow me.",
+  "description": "List who does not follow me.",
   "main": "index.ts",
   "module": "src/index.ts",
   "type": "module",
@@ -11,7 +11,12 @@
     "fmt": "prettier -w .",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
-  "keywords": ["list", "not", "following", "twitter"],
+  "keywords": [
+    "list",
+    "not",
+    "following",
+    "twitter"
+  ],
   "author": "pan93412",
   "license": "AGPL-3.0-only",
   "dependencies": {

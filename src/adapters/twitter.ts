@@ -43,14 +43,22 @@ export class TwitterLister extends Lister {
     userId: string,
     nextToken?: string
   ): Promise<UserV2[]> {
-    return this.commonTwitterFetch(this.#client.v2.followers, userId, nextToken);
+    return this.commonTwitterFetch(
+      this.#client.v2.followers,
+      userId,
+      nextToken
+    );
   }
 
   async getTwitterFollowingWithoutCache(
     userId: string,
     nextToken?: string
   ): Promise<UserV2[]> {
-    return this.commonTwitterFetch(this.#client.v2.following, userId, nextToken);
+    return this.commonTwitterFetch(
+      this.#client.v2.following,
+      userId,
+      nextToken
+    );
   }
 
   async getTwitterFollowers(userId: string): Promise<UserV2[]> {

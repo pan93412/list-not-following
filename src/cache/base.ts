@@ -53,9 +53,6 @@ export abstract class BaseCacherAbstract<T> {
     const cache = await this.retrieve(retrieveOptions ?? undefined);
 
     // Run defaults() if the cache is not found.
-    // We `await` whether the defaults is a promise or not,
-    // as `await 1` == `1` (though yield triggered,
-    // but should not a big deal.)
     if (cache === null) {
       const value = await defaults();
       await this.write(value, writeOptions ?? undefined);

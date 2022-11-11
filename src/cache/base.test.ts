@@ -73,7 +73,7 @@ describe("Check if the basic functions of BaseCacherAbstract works", () => {
       );
     });
 
-    it("with options, the first parameter should be the user-provided value", () => {
+    it("with options, the second parameter should be the user-provided value", () => {
       const cacher = new TestCacher("hello");
       const options = { expired: new Date(1000) };
 
@@ -107,7 +107,7 @@ describe("Check if the basic functions of BaseCacherAbstract works", () => {
       expect(defaultFunction).toBeCalledTimes(0);
     });
 
-    it("when cache doesn't hit, the write function should be called.", async () => {
+    it("when cache doesn't hit, the defaults & write function should be called.", async () => {
       const cacher = new TestCacher("hello");
 
       const defaultFunction = jest

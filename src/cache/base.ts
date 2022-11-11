@@ -11,7 +11,7 @@ export interface CacheWriteOptions {
 /**
  * The options for retrieving cache.
  */
-export interface CacheRetrieveOptions {}
+export type CacheRetrieveOptions = Record<string, never>;
 
 export type OptionsUnion = {
   writeOptions?: CacheWriteOptions | null;

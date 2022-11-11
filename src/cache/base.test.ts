@@ -5,8 +5,8 @@ import {
   type CacheWriteOptions,
 } from "./base.js";
 
-type RetrieveFunction<T> = (...args: any) => Promise<T>;
-type WriteFunction = (...args: any) => Promise<void>;
+type RetrieveFunction<T> = (...args: unknown[]) => Promise<T>;
+type WriteFunction = (...args: unknown[]) => Promise<void>;
 
 const globalRetrieveFunction = jest
   .fn<RetrieveFunction<null>>()

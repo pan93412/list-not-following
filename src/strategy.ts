@@ -23,7 +23,7 @@ export class ListerStrategy extends Map<ListerIdentifier, Lister> {
     const matches = userInput.match(inputPattern);
     if (!matches) throw new InvalidInputFormat(userInput);
 
-    const [_, listId, arg] = matches;
+    const [, listId, arg] = matches;
 
     const lister = this.get(listId);
     if (!lister) throw new NoSuchLister(listId);

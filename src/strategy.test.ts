@@ -4,11 +4,11 @@ import { Lister, UnfollowedUserStructure } from "./lister.js";
 import { ListerStrategy } from "./strategy.js";
 
 class DemoLister extends Lister {
-  getUnfollowedUsers(id: string): Promise<UnfollowedUserStructure[]> {
+  getUnfollowedUsers(): Promise<UnfollowedUserStructure[]> {
     throw new Error("Method not implemented.");
   }
 
-  determineIdFromInput(userInputs: string): Promise<string> {
+  determineIdFromInput(): Promise<string> {
     throw new Error("Method not implemented.");
   }
 }

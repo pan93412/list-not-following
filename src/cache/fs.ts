@@ -3,7 +3,6 @@ import path from "path";
 import { z } from 'zod';
 import {
   BaseCacherAbstract,
-  CacheRetrieveOptions,
   CacheWriteOptions,
 } from "./base.js";
 
@@ -11,8 +10,6 @@ const cacheDataSchema = z.object({
   expiredAt: z.string().transform((v) => new Date(v)).nullable(),
   data: z.unknown(),
 });
-
-type CacheData = z.infer<typeof cacheDataSchema>;
 
 /**
  * The cacher based on filesystem.
@@ -34,9 +31,7 @@ export class FsCacher<T> extends BaseCacherAbstract<T> {
     super(uniqueCacheId);
   }
 
-  async retrieve(
-    _options?: CacheRetrieveOptions | undefined,
-  ): Promise<T | null> {
+  async retrieve(): Promise<T | null> {
     try {
       const value = await fs.readFile(this.CacheFilename, "utf-8");
       const parsed = cacheDataSchema.safeParse(JSON.parse(value));
@@ -79,7 +74,7 @@ export class FsCacher<T> extends BaseCacherAbstract<T> {
     const result = {
       expiredAt,
       data: value,
-    } satisfies CacheData;
+    } satisfies z.infer<typeof cacheDataSchema>;
 
     try {
       await fs.writeFile(this.CacheFilename, JSON.stringify(result), "utf-8");

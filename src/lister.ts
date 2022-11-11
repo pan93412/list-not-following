@@ -25,7 +25,6 @@ export abstract class Lister {
    *
    * @param userInputs The user input. It can be a username, a URL, or a user ID
    * @returns a {@link UserIdentifier}.
-   * @throws if the input is invalid.
    * @example
    * determineIdFromInput("@byStarTW") // -> (Twitter ID)
    * determineIdFromInput("https://twitter.com/byStarTW") // -> (Twitter ID)

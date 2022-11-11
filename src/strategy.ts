@@ -10,7 +10,8 @@ export class ListerStrategy extends Map<ListerIdentifier, Lister> {
    * @param userInput A {@link ListerIdentifier} with an argument,
    * separated with ':'. For example: `twitter:@byStarTW`
    * @returns The most suitable listener, and the argument (@byStarTW)
-   * @throws when the input is invalid or listener is not found.
+   * @throws {InvalidInputFormat} The input is not in the `id:arg` form.
+   * @throws {NoSuchLister} The specified lister does not exist or was not registered.
    * @examples
    * ```
    * // assume you have registered it with `.set`

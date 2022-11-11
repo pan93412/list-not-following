@@ -42,7 +42,7 @@ export abstract class BaseCacherAbstract<T> {
    * into the cache store (and return it.)
    *
    * @param defaults The value source when the cache is not found.
-   * @param options
+   * @param optionsUnion The options for write & retrieve operations.
    */
   async retrieveWithDefault(
     defaults: () => Promise<T>,

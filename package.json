@@ -1,7 +1,7 @@
 {
   "name": "list-not-following",
   "version": "1.0.0",
-  "description": "List who does not follow me.",
+  "description": "List who does not follow you.",
   "main": "index.ts",
   "module": "src/index.ts",
   "type": "module",

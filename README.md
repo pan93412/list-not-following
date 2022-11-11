@@ -1,4 +1,4 @@
-# List who doesn't follow me
+# List who doesn't follow you
 
 This is a hobby project, and I don't care about “following back” 😂
 

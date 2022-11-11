@@ -18,7 +18,7 @@ export class ListerStrategy extends Map<ListerIdentifier, Lister> {
    * ```
    */
   determine(userInput: string): [Lister, string] {
-    const inputPattern = /(.+):(.+)/;
+    const inputPattern = /(.+?):(.+)/;
 
     const matches = userInput.match(inputPattern);
     if (!matches) throw new InvalidInputFormat(userInput);
